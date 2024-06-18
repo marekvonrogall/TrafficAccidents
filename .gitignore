@@ -1,0 +1,117 @@
+# Ignore Visual Studio temporary files, build results, and
+# certain other files and directories related to the Visual Studio development environment.
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (Mono Auto Generated)
+mono_crash.*
+
+# User-specific files (Visual Studio Code)
+.vscode/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/*.code-workspace
+
+# Local History for Visual Studio
+.vs/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Office temporary files
+~$*
+*.~??
+
+# Windows shortcuts
+*.lnk
+
+# Output directories
+bin/
+obj/
+
+# Build results
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+*.nupkg.sha512
+
+# MSTest test results
+[Tt]est[Rr]esult*/
+[Tt]est[Rr]esult.trx
+*.Coverage
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+
+# Build results of an ATL project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# DNX
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Entity Framework Core
+*.efproject.json
+*.jfm
+
+# Rider
+.idea/
+*.sln.iml
+
+# IDE - VS Code
+.vscode/
+
+# IDE - Rider
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Visual Studio 2019
+.vs/
+
+# Visual Studio Code
+.vscode/
+
+# Local History for Visual Studio
+.vs/
