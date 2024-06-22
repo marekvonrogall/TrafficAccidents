@@ -4,6 +4,7 @@ using Cassandra;
 using TrafficAccidents.Classes;
 using System;
 using System.Windows.Media;
+using System.Globalization;
 
 
 namespace TrafficAccidents
@@ -30,7 +31,7 @@ namespace TrafficAccidents
             accidentMap.CoreWebView2.Navigate($"https://www.openstreetmap.org/?mlat={mlat}&mlon={mlon}");
         }
 
-        private void boxAccidentID_showDS_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void BoxAccidentID_showDS_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             labelAccidentID_showDS.Visibility = Visibility.Hidden;
             try
@@ -79,7 +80,7 @@ namespace TrafficAccidents
             else checkMotorcycle.IsChecked = false;
         }
 
-        private void buttonDisplayEntry_Click(object sender, RoutedEventArgs e)
+        private void ButtonDisplayEntry_Click(object sender, RoutedEventArgs e)
         {
             RemoveButtonHighlight();
             buttonDisplayEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
@@ -87,7 +88,7 @@ namespace TrafficAccidents
             canvasDisplayData.Visibility = Visibility.Visible;
         }
 
-        private void buttonAddEntry_Click(object sender, RoutedEventArgs e)
+        private void ButtonAddEntry_Click(object sender, RoutedEventArgs e)
         {
             RemoveButtonHighlight();
             buttonAddEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
@@ -97,13 +98,13 @@ namespace TrafficAccidents
             boxAdd_accidentID.Text = read.GetNextAvailableId(cassandraDb.Session).ToString();
         }
 
-        private void buttonModifyEntry_Click(object sender, RoutedEventArgs e)
+        private void ButtonModifyEntry_Click(object sender, RoutedEventArgs e)
         {
             RemoveButtonHighlight();
             buttonModifyEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
         }
 
-        private void buttonDeleteEntry_Click(object sender, RoutedEventArgs e)
+        private void ButtonDeleteEntry_Click(object sender, RoutedEventArgs e)
         {
             RemoveButtonHighlight();
             buttonDeleteEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
@@ -121,6 +122,61 @@ namespace TrafficAccidents
         {
             canvasDisplayData.Visibility = Visibility.Hidden;
             canvasAddData.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonCreateAndAddEntry_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DateTime selectedDate = datePickerAdd_date.SelectedDate.Value;
+
+                int year = selectedDate.Year;
+                int month = selectedDate.Month;
+                string day = selectedDate.Day.ToString();
+                string dayOfWeek = selectedDate.ToString("dddd", new CultureInfo("de-DE"));
+                string weekday = $"{day} {dayOfWeek}";
+                int? hour = null;
+                if (boxAdd_hour.Text != "") hour = Convert.ToInt32(boxAdd_hour.Text);
+
+                Accident accident = new Accident
+                {
+                    GeoPoint = $"{boxAdd_mlat.Text}, {boxAdd_mlon.Text}",
+                    GeoShape = $"{{\"coordinates\": [{boxAdd_mlon.Text}, {boxAdd_mlat.Text}], \"type\": \"Point\"}}",
+                    IdUnfall = read.GetNextAvailableId(cassandraDb.Session),
+                    Typ = boxAdd_type.Text,
+                    Schwere = boxAdd_seriousness.Text,
+                    Jahr = year,
+                    Monat = month,
+                    Wochentag = weekday,
+                    Stunde = hour,
+                    Strasseart = boxAdd_streetType.Text,
+                    FussggBet = checkAdd_pedestrian.IsChecked ?? false,
+                    FahrrdBet = checkAdd_bicycle.IsChecked ?? false,
+                    MotordBet = checkAdd_motorcycle.IsChecked ?? false
+                };
+
+                add.AddEntry(cassandraDb.Session, accident);
+                ClearAddPageElements();
+            }
+            catch
+            {
+                MessageBox.Show("Ungültige Eingaben erkannt.", "Fehler beim Hinzufügen");
+            }
+        }
+
+        private void ClearAddPageElements()
+        {
+            boxAdd_mlat.Clear();
+            boxAdd_mlon.Clear();
+            boxAdd_accidentID.Text = read.GetNextAvailableId(cassandraDb.Session).ToString();
+            boxAdd_type.Clear();
+            boxAdd_seriousness.Clear();
+            datePickerAdd_date.SelectedDate = null;
+            boxAdd_hour.Clear();
+            boxAdd_streetType.Clear();
+            checkAdd_pedestrian.IsChecked = false;
+            checkAdd_bicycle.IsChecked = false;
+            checkAdd_motorcycle.IsChecked = false;
         }
     }
 }

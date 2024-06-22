@@ -14,10 +14,11 @@ namespace TrafficAccidents.Classes
             try
             {
                 mapper.Insert(accident);
+                MessageBox.Show("Eintrag erfolgreich hinzugefügt!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim hinzufügen: {ex.Message}");
+                MessageBox.Show($"Meldung: {ex.Message}", "Fehler beim Hinzufügen");
             }
         }
     }

@@ -21,15 +21,15 @@
     <Grid Background="#FFDCD8D8">
         <Rectangle HorizontalAlignment="Left" Height="772" VerticalAlignment="Center" Width="265" Margin="-1,0,0,0" Fill="#FF504E4E" Grid.ColumnSpan="2"/>
         <Label Content="Operation auswählen" HorizontalAlignment="Left" Margin="11,19,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFDCD8D8" FontSize="20" FontFamily="Arial Black" FontWeight="Bold"/>
-        <Button x:Name="buttonDisplayEntry" Style="{StaticResource NoHoverButtonStyle}" Content="Datensatz anzeigen" HorizontalAlignment="Left" Margin="0,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264"  Click="buttonDisplayEntry_Click" Background="#FF938DBD"/>
-        <Button x:Name="buttonAddEntry" Style="{StaticResource NoHoverButtonStyle}" Content="Datensatz hinzufügen" HorizontalAlignment="Left" Margin="0,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="buttonAddEntry_Click"/>
-        <Button x:Name="buttonModifyEntry" Style="{StaticResource NoHoverButtonStyle}" Content="Datensatz bearbeiten" HorizontalAlignment="Left" Margin="0,198,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="buttonModifyEntry_Click"/>
-        <Button x:Name="buttonDeleteEntry" Style="{StaticResource NoHoverButtonStyle}" Content="Datensatz löschen" HorizontalAlignment="Left" Margin="0,248,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="buttonDeleteEntry_Click"/>
+        <Button x:Name="buttonDisplayEntry" Style="{StaticResource NoHoverButtonStyle}" Content="Datensatz anzeigen" HorizontalAlignment="Left" Margin="0,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264"  Click="ButtonDisplayEntry_Click" Background="#FF938DBD"/>
+        <Button x:Name="buttonAddEntry" Style="{StaticResource NoHoverButtonStyle}" Content="Datensatz hinzufügen" HorizontalAlignment="Left" Margin="0,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="ButtonAddEntry_Click"/>
+        <Button x:Name="buttonModifyEntry" Style="{StaticResource NoHoverButtonStyle}" Content="Datensatz bearbeiten" HorizontalAlignment="Left" Margin="0,198,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="ButtonModifyEntry_Click"/>
+        <Button x:Name="buttonDeleteEntry" Style="{StaticResource NoHoverButtonStyle}" Content="Datensatz löschen" HorizontalAlignment="Left" Margin="0,248,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="ButtonDeleteEntry_Click"/>
 
         <Canvas x:Name="canvasDisplayData" Margin="264,0,0,0" Visibility="Hidden">
             <Label Content="Datensatz anzeigen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="19" VerticalAlignment="Top"/>
             <Wpf:WebView2 x:Name="accidentMap" Height="449" Canvas.Left="28" Canvas.Top="99" Width="675" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name="boxAccidentID_showDS" Canvas.Left="107" TextWrapping="Wrap" Canvas.Top="72" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="boxAccidentID_showDS_TextChanged"/>
+            <TextBox x:Name="boxAccidentID_showDS" Canvas.Left="107" TextWrapping="Wrap" Canvas.Top="72" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="BoxAccidentID_showDS_TextChanged"/>
             <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="68" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Label x:Name="labelAccidentID_showDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="254" Canvas.Top="82" HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
             <Label Content="Typ:" Canvas.Left="28" Canvas.Top="565" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -71,7 +71,7 @@
             <CheckBox x:Name="checkAdd_pedestrian" Content="Fussgänger" Canvas.Left="106" Canvas.Top="324"/>
             <CheckBox x:Name="checkAdd_bicycle" Content="Fahrrad" Canvas.Left="203" Canvas.Top="324" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <CheckBox x:Name="checkAdd_motorcycle" Content="Motorrad" Canvas.Left="277" Canvas.Top="323" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button Content="Eintrag zur Datenbank hinzufügen" Canvas.Left="33" Canvas.Top="356" Height="22" Width="371" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White"/>
+            <Button x:Name="buttonCreateAndAddEntry" Content="Eintrag zur Datenbank hinzufügen" Canvas.Left="33" Canvas.Top="356" Height="22" Width="371" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White" Click="ButtonCreateAndAddEntry_Click"/>
         </Canvas>
 
     </Grid>
