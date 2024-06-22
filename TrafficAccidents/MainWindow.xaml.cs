@@ -17,6 +17,7 @@ namespace TrafficAccidents
         private CassandraDb cassandraDb = new CassandraDb();
         private Read read = new Read();
         private Add add = new Add();
+        private Delete delete = new Delete();
 
         public MainWindow()
         {
@@ -38,7 +39,7 @@ namespace TrafficAccidents
             {
                 int id = Convert.ToInt32(boxAccidentID_showDS.Text);
                 read.GetEntryById(cassandraDb.Session, id);
-                if (read.Accidents[0] != null)
+                if (read.Accident != null)
                 {
                     DisplayAccident();
                 }
@@ -49,34 +50,34 @@ namespace TrafficAccidents
 
         private void DisplayAccident()
         {
-            string[] coordinates = read.Accidents[0].GeoPoint.Split(',');
+            string[] coordinates = read.Accident.GeoPoint.Split(',');
             string mlat = coordinates[0].Trim();
             string mlon = coordinates[1].Trim();
             ShowCoordinatesOnMap(mlat, mlon);
 
-            labelType.Content = read.Accidents[0].Typ;
-            labelSeriousness.Content = read.Accidents[0].Schwere;
+            labelType.Content = read.Accident.Typ;
+            labelSeriousness.Content = read.Accident.Schwere;
 
-            string[] numberDayOfWeek = read.Accidents[0].Wochentag.Split(' ');
+            string[] numberDayOfWeek = read.Accident.Wochentag.Split(' ');
             string number = Convert.ToInt32(numberDayOfWeek[0].Trim()).ToString("D2");
             string dayOfWeek = numberDayOfWeek[1].Trim();
-            string year = read.Accidents[0].Jahr.ToString();
-            string month = read.Accidents[0].Monat.ToString("D2");
-            string hour = read.Accidents[0].Stunde.ToString();
+            string year = read.Accident.Jahr.ToString();
+            string month = read.Accident.Monat.ToString("D2");
+            string hour = read.Accident.Stunde.ToString();
             if (hour == "") hour = "/";
 
             string date = $"{dayOfWeek}, der {number}.{month}.{year} ({hour})";
             labelDate.Content = date;
 
-            labelStreetType.Content = read.Accidents[0].Strasseart;
+            labelStreetType.Content = read.Accident.Strasseart;
 
-            if (read.Accidents[0].FussggBet == true) { checkPedestrian.IsChecked = true; }
+            if (read.Accident.FussggBet == true) { checkPedestrian.IsChecked = true; }
             else checkPedestrian.IsChecked = false;
 
-            if (read.Accidents[0].FahrrdBet == true) { checkBicycle.IsChecked = true; }
+            if (read.Accident.FahrrdBet == true) { checkBicycle.IsChecked = true; }
             else checkBicycle.IsChecked = false;
 
-            if (read.Accidents[0].MotordBet == true) { checkMotorcycle.IsChecked = true; }
+            if (read.Accident.MotordBet == true) { checkMotorcycle.IsChecked = true; }
             else checkMotorcycle.IsChecked = false;
         }
 
@@ -102,12 +103,16 @@ namespace TrafficAccidents
         {
             RemoveButtonHighlight();
             buttonModifyEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
+            HideAllCanvases();
+            canvasModifyData.Visibility = Visibility.Visible;
         }
 
         private void ButtonDeleteEntry_Click(object sender, RoutedEventArgs e)
         {
             RemoveButtonHighlight();
             buttonDeleteEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
+            HideAllCanvases();
+            canvasDeleteData.Visibility = Visibility.Visible;
         }
 
         private void RemoveButtonHighlight()
@@ -122,6 +127,8 @@ namespace TrafficAccidents
         {
             canvasDisplayData.Visibility = Visibility.Hidden;
             canvasAddData.Visibility = Visibility.Hidden;
+            canvasModifyData.Visibility = Visibility.Hidden;
+            canvasDeleteData.Visibility = Visibility.Hidden;
         }
 
         private void ButtonCreateAndAddEntry_Click(object sender, RoutedEventArgs e)
@@ -177,6 +184,23 @@ namespace TrafficAccidents
             checkAdd_pedestrian.IsChecked = false;
             checkAdd_bicycle.IsChecked = false;
             checkAdd_motorcycle.IsChecked = false;
+        }
+
+        private void BoxAccidentID_deleteDS_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            labelAccidentID_deleteDS.Visibility = Visibility.Hidden;
+            try
+            {
+                int id = Convert.ToInt32(boxAccidentID_deleteDS.Text);
+                read.GetEntryById(cassandraDb.Session, id);
+                if (read.Accident == null) throw new Exception();
+            }
+            catch { labelAccidentID_deleteDS.Visibility = Visibility.Visible; }
+        }
+
+        private void buttonDeleteEntryCanvas_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

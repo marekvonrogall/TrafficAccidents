@@ -71,6 +71,7 @@
     <Compile Include="Classes\Accident.cs" />
     <Compile Include="Classes\Add.cs" />
     <Compile Include="Classes\CassandraDb.cs" />
+    <Compile Include="Classes\Delete.cs" />
     <Compile Include="Classes\Read.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
