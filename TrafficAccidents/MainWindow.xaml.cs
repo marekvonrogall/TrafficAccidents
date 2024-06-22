@@ -26,10 +26,22 @@ namespace TrafficAccidents
             canvasDisplayData.Visibility = Visibility.Visible;
         }
 
-        private async void ShowCoordinatesOnMap(string mlat, string mlon)
+        private async void ShowCoordinatesOnMap_Read(string mlat, string mlon)
         {
-            await accidentMap.EnsureCoreWebView2Async(null);
-            accidentMap.CoreWebView2.Navigate($"https://www.openstreetmap.org/?mlat={mlat}&mlon={mlon}");
+            await accidentMap_Read.EnsureCoreWebView2Async(null);
+            accidentMap_Read.CoreWebView2.Navigate($"https://www.openstreetmap.org/?mlat={mlat}&mlon={mlon}");
+        }
+
+        private async void ShowCoordinatesOnMap_Add(string mlat, string mlon)
+        {
+            await accidentMap_Add.EnsureCoreWebView2Async(null);
+            accidentMap_Add.CoreWebView2.Navigate($"https://www.openstreetmap.org/?mlat={mlat}&mlon={mlon}");
+        }
+
+        private async void ShowCoordinatesOnMap_Modify(string mlat, string mlon)
+        {
+            await accidentMap_Modify.EnsureCoreWebView2Async(null);
+            accidentMap_Modify.CoreWebView2.Navigate($"https://www.openstreetmap.org/?mlat={mlat}&mlon={mlon}");
         }
 
         private void BoxAccidentID_showDS_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -53,7 +65,7 @@ namespace TrafficAccidents
             string[] coordinates = read.Accident.GeoPoint.Split(',');
             string mlat = coordinates[0].Trim();
             string mlon = coordinates[1].Trim();
-            ShowCoordinatesOnMap(mlat, mlon);
+            ShowCoordinatesOnMap_Read(mlat, mlon);
 
             labelType.Content = read.Accident.Typ;
             labelSeriousness.Content = read.Accident.Schwere;
@@ -259,6 +271,16 @@ namespace TrafficAccidents
         private void ButtonCreateAndModifyEntry_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BoxAdd_coordinates_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            ShowCoordinatesOnMap_Add(boxAdd_mlat.Text, boxAdd_mlon.Text);
+        }
+
+        private void BoxModify_coordinates_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            ShowCoordinatesOnMap_Modify(boxModify_mlat.Text, boxModify_mlon.Text);
         }
     }
 }
