@@ -15,6 +15,7 @@ namespace TrafficAccidents
     {
         private CassandraDb cassandraDb = new CassandraDb();
         private Read read = new Read();
+        private Add add = new Add();
 
         public MainWindow()
         {
@@ -92,6 +93,8 @@ namespace TrafficAccidents
             buttonAddEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
             HideAllCanvases();
             canvasAddData.Visibility = Visibility.Visible;
+
+            boxAdd_accidentID.Text = read.GetNextAvailableId(cassandraDb.Session).ToString();
         }
 
         private void buttonModifyEntry_Click(object sender, RoutedEventArgs e)

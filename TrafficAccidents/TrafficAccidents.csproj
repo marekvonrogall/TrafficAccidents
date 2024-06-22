@@ -69,6 +69,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\Accident.cs" />
+    <Compile Include="Classes\Add.cs" />
     <Compile Include="Classes\CassandraDb.cs" />
     <Compile Include="Classes\Read.cs" />
     <Compile Include="MainWindow.xaml.cs">
