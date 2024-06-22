@@ -5,61 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrafficAccidents"
         xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Class="TrafficAccidents.MainWindow"
-        Title="MainWindow" Height="620" Width="1020">
+        Title="MainWindow" Height="700" Width="1020">
     <Window.Resources>
         <ControlTemplate x:Key="accidents" TargetType="{x:Type DataGrid}">
             <Grid/>
         </ControlTemplate>
     </Window.Resources>
     <Grid Background="#FFDCD8D8">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="111*"/>
-            <ColumnDefinition Width="204*"/>
-            <ColumnDefinition Width="485*"/>
-        </Grid.ColumnDefinitions>
-        <Rectangle HorizontalAlignment="Left" Height="604" VerticalAlignment="Center" Width="265" Margin="-1,0,0,0" Fill="#FF504E4E" Grid.ColumnSpan="2"/>
-        <Label Content="Operation auswählen" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFDCD8D8" FontSize="20" FontFamily="Arial Black" FontWeight="Bold" Grid.ColumnSpan="2"/>
-        <Button x:Name="buttonDisplayEntry" Content="Datensatz anzeigen" HorizontalAlignment="Left" Margin="11,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="241" BorderBrush="#FF826D09" BorderThickness="2" Grid.ColumnSpan="2" Click="buttonDisplayEntry_Click">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button x:Name="buttonAddEntry" Content="Datensatz hinzufügen" HorizontalAlignment="Left" Margin="11,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="241" BorderBrush="#FF098264" BorderThickness="2" Grid.ColumnSpan="2">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button x:Name="buttonModifyEntry" Content="Datensatz bearbeiten" HorizontalAlignment="Left" Margin="11,195,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="241" BorderBrush="#FF097F82" BorderThickness="2" Grid.ColumnSpan="2">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button x:Name="buttonDeleteEntry" Content="Datensatz löschen" HorizontalAlignment="Left" Margin="11,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="241" BorderBrush="#FF822509" BorderThickness="2" Grid.ColumnSpan="2">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button x:Name="buttonImportData" Content="Daten importieren (.CSV)" HorizontalAlignment="Left" Margin="11,510,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="241" BorderBrush="#FF4F0982" BorderThickness="2" Grid.ColumnSpan="2">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Canvas x:Name="canvasDisplayData" Margin="130,0,0,0" Grid.ColumnSpan="2" Grid.Column="1">
-            <Label Content="Datensatz anzeigen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="254" Canvas.Top="24" VerticalAlignment="Center"/>
-            <Wpf:WebView2 x:Name="accidentMap" Height="449" Canvas.Left="28" Canvas.Top="113" Width="675" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name="boxAccidentID_showDS" Canvas.Left="107" TextWrapping="Wrap" Canvas.Top="86" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="boxAccidentID_showDS_TextChanged"/>
-            <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="82" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Rectangle HorizontalAlignment="Left" Height="772" VerticalAlignment="Center" Width="265" Margin="-1,0,0,0" Fill="#FF504E4E" Grid.ColumnSpan="2"/>
+        <Label Content="Operation auswählen" HorizontalAlignment="Left" Margin="11,19,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFDCD8D8" FontSize="20" FontFamily="Arial Black" FontWeight="Bold"/>
+        <Button x:Name="buttonDisplayEntry" Content="Datensatz anzeigen" HorizontalAlignment="Left" Margin="0,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264"  Click="buttonDisplayEntry_Click" Background="#FF938DBD"/>
+        <Button x:Name="buttonAddEntry" Content="Datensatz hinzufügen" HorizontalAlignment="Left" Margin="0,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="buttonAddEntry_Click"/>
+        <Button x:Name="buttonModifyEntry" Content="Datensatz bearbeiten" HorizontalAlignment="Left" Margin="0,198,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="buttonModifyEntry_Click"/>
+        <Button x:Name="buttonDeleteEntry" Content="Datensatz löschen" HorizontalAlignment="Left" Margin="0,248,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="264" Background="#FFDDDDDD" Click="buttonDeleteEntry_Click"/>
+        <Canvas x:Name="canvasDisplayData" Margin="264,0,0,0">
+            <Label Content="Datensatz anzeigen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="19" VerticalAlignment="Top"/>
+            <Wpf:WebView2 x:Name="accidentMap" Height="449" Canvas.Left="28" Canvas.Top="99" Width="675" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="boxAccidentID_showDS" Canvas.Left="107" TextWrapping="Wrap" Canvas.Top="72" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="boxAccidentID_showDS_TextChanged"/>
+            <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="68" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Label x:Name="labelAccidentID_showDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="254" Canvas.Top="82" HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
+            <Label Content="Typ:" Canvas.Left="28" Canvas.Top="565" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Schwere:" Canvas.Left="28" Canvas.Top="585" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60"/>
+            <Label Content="Datum:" Canvas.Left="28" Canvas.Top="605" FontWeight="Bold" Width="60" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Betroffene Parteien:" Canvas.Left="579" Canvas.Top="565" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+            <CheckBox x:Name="boxPedestrian" Content="Fussgänger" Canvas.Left="583" Canvas.Top="593" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <CheckBox x:Name="checkBicycle" Content="Fahrrad" Canvas.Left="583" Canvas.Top="613" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <CheckBox x:Name="checkMotorCycle" Content="Motorrad" Canvas.Left="583" Canvas.Top="633" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="labelType" Content="" Canvas.Left="107" Canvas.Top="565" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="labelSeriousness" Content="" Canvas.Left="107" Canvas.Top="585" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="labelDate" Content="" Canvas.Left="107" Canvas.Top="605" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Rectangle Height="449" Canvas.Left="28" Stroke="Black" Canvas.Top="99" Width="675" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Stunde:" Canvas.Left="28" Canvas.Top="625" FontWeight="Bold" Width="60" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="labelHour" Content="" Canvas.Left="107" Canvas.Top="625" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
 
     </Grid>
