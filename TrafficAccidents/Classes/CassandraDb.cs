@@ -1,4 +1,5 @@
 ﻿using Cassandra;
+using System.Windows;
 
 namespace TrafficAccidents.Classes
 {
@@ -7,10 +8,17 @@ namespace TrafficAccidents.Classes
         public ISession Session { get; set; }
         public CassandraDb()
         {
-            var cluster = Cluster.Builder()
+            try
+            {
+                var cluster = Cluster.Builder()
                                  .AddContactPoints("127.0.0.1")
                                  .Build();
-            Session = cluster.Connect("traffic");
+                Session = cluster.Connect("traffic");
+            }
+            catch
+            {
+                MessageBox.Show("Stelle sicher, dass die Datenbank läuft (http://localhost:9042/) und der Keyspace \"traffic\" existiert.", "Fehler beim Verbinden zur Datenbank");
+            }
         }
     }
 }

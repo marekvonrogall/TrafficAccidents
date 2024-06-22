@@ -2,6 +2,7 @@
 using Microsoft.Web.WebView2.Core;
 using Cassandra;
 using TrafficAccidents.Classes;
+using System;
 
 
 namespace TrafficAccidents
@@ -27,8 +28,26 @@ namespace TrafficAccidents
 
         private void buttonDisplayEntry_Click(object sender, RoutedEventArgs e)
         {
-            read.AllEntries(cassandraDb.Session);
-            //ShowCoordinatesOnMap("47.569294711177534", "7.590064633926254");
+            canvasDisplayData.Visibility = Visibility.Visible;
+        }
+
+        private void boxAccidentID_showDS_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            labelAccidentID_showDS.Visibility = Visibility.Hidden;
+            try
+            {
+                int id = Convert.ToInt32(boxAccidentID_showDS.Text);
+                read.GetEntryById(cassandraDb.Session, id);
+                if (read.Accidents[0] != null)
+                {
+                    string[] coordinates = read.Accidents[0].GeoPoint.Split(',');
+                    string mlat = coordinates[0].Trim();
+                    string mlon = coordinates[1].Trim();
+                    ShowCoordinatesOnMap(mlat, mlon);
+                }
+                else { throw new Exception(); }
+            }
+            catch { labelAccidentID_showDS.Visibility = Visibility.Visible; }
         }
     }
 }

@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrafficAccidents"
         xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Class="TrafficAccidents.MainWindow"
-        Title="MainWindow" Height="620" Width="1000">
+        Title="MainWindow" Height="620" Width="1020">
+    <Window.Resources>
+        <ControlTemplate x:Key="accidents" TargetType="{x:Type DataGrid}">
+            <Grid/>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid Background="#FFDCD8D8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="111*"/>
             <ColumnDefinition Width="204*"/>
             <ColumnDefinition Width="485*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle HorizontalAlignment="Left" Height="585" VerticalAlignment="Center" Width="265" Margin="-1,0,0,0" Fill="#FF504E4E" Grid.ColumnSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="604" VerticalAlignment="Center" Width="265" Margin="-1,0,0,0" Fill="#FF504E4E" Grid.ColumnSpan="2"/>
         <Label Content="Operation auswählen" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFDCD8D8" FontSize="20" FontFamily="Arial Black" FontWeight="Bold" Grid.ColumnSpan="2"/>
         <Button x:Name="buttonDisplayEntry" Content="Datensatz anzeigen" HorizontalAlignment="Left" Margin="11,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.126,0.653" Height="51" Width="241" BorderBrush="#FF826D09" BorderThickness="2" Grid.ColumnSpan="2" Click="buttonDisplayEntry_Click">
             <Button.Resources>
@@ -49,9 +54,12 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Canvas Margin="153,0,0,0" Grid.ColumnSpan="2" Grid.Column="1">
-            <Label Content="Datensatz anzeigen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="235" Canvas.Top="24" VerticalAlignment="Top"/>
-            <Wpf:WebView2 x:Name="accidentMap" Height="486" Canvas.Left="10" Canvas.Top="74" Width="674" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Canvas x:Name="canvasDisplayData" Margin="130,0,0,0" Grid.ColumnSpan="2" Grid.Column="1">
+            <Label Content="Datensatz anzeigen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="254" Canvas.Top="24" VerticalAlignment="Center"/>
+            <Wpf:WebView2 x:Name="accidentMap" Height="449" Canvas.Left="28" Canvas.Top="113" Width="675" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="boxAccidentID_showDS" Canvas.Left="107" TextWrapping="Wrap" Canvas.Top="86" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="boxAccidentID_showDS_TextChanged"/>
+            <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="82" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="labelAccidentID_showDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="254" Canvas.Top="82" HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
         </Canvas>
 
     </Grid>
