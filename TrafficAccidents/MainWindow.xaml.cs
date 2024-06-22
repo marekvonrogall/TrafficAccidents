@@ -3,6 +3,7 @@ using Microsoft.Web.WebView2.Core;
 using Cassandra;
 using TrafficAccidents.Classes;
 using System;
+using System.Windows.Media;
 
 
 namespace TrafficAccidents
@@ -18,6 +19,8 @@ namespace TrafficAccidents
         public MainWindow()
         {
             InitializeComponent();
+            HideAllCanvases();
+            canvasDisplayData.Visibility = Visibility.Visible;
         }
 
         private async void ShowCoordinatesOnMap(string mlat, string mlon)
@@ -58,31 +61,63 @@ namespace TrafficAccidents
             string year = read.Accidents[0].Jahr.ToString();
             string month = read.Accidents[0].Monat.ToString("D2");
             string hour = read.Accidents[0].Stunde.ToString();
+            if (hour == "") hour = "/";
 
-            string date = $"{dayOfWeek}, der {number}.{month}.{year}";
+            string date = $"{dayOfWeek}, der {number}.{month}.{year} ({hour})";
             labelDate.Content = date;
 
-            if(hour != "") { labelHour.Content = hour; }
-            else { labelHour.Content = "/"; }
+            labelStreetType.Content = read.Accidents[0].Strasseart;
+
+            if (read.Accidents[0].FussggBet == true) { checkPedestrian.IsChecked = true; }
+            else checkPedestrian.IsChecked = false;
+
+            if (read.Accidents[0].FahrrdBet == true) { checkBicycle.IsChecked = true; }
+            else checkBicycle.IsChecked = false;
+
+            if (read.Accidents[0].MotordBet == true) { checkMotorcycle.IsChecked = true; }
+            else checkMotorcycle.IsChecked = false;
+        }
+
+        private void buttonDisplayEntry_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveButtonHighlight();
+            buttonDisplayEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
+            HideAllCanvases();
+            canvasDisplayData.Visibility = Visibility.Visible;
         }
 
         private void buttonAddEntry_Click(object sender, RoutedEventArgs e)
         {
-
+            RemoveButtonHighlight();
+            buttonAddEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
+            HideAllCanvases();
+            canvasAddData.Visibility = Visibility.Visible;
         }
 
         private void buttonModifyEntry_Click(object sender, RoutedEventArgs e)
         {
-
+            RemoveButtonHighlight();
+            buttonModifyEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
         }
 
         private void buttonDeleteEntry_Click(object sender, RoutedEventArgs e)
         {
-
+            RemoveButtonHighlight();
+            buttonDeleteEntry.Background = new SolidColorBrush(Color.FromRgb(147, 141, 189));
         }
-        private void buttonDisplayEntry_Click(object sender, RoutedEventArgs e)
+
+        private void RemoveButtonHighlight()
         {
-            canvasDisplayData.Visibility = Visibility.Visible;
+            buttonDisplayEntry.Background = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+            buttonModifyEntry.Background = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+            buttonDeleteEntry.Background = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+            buttonAddEntry.Background = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+        }
+
+        private void HideAllCanvases()
+        {
+            canvasDisplayData.Visibility = Visibility.Hidden;
+            canvasAddData.Visibility = Visibility.Hidden;
         }
     }
 }
