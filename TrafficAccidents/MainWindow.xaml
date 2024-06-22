@@ -29,9 +29,9 @@
         <Canvas x:Name="canvasDisplayData" Margin="264,0,0,0" Visibility="Hidden">
             <Label Content="Datensatz anzeigen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="19" VerticalAlignment="Top"/>
             <Wpf:WebView2 x:Name="accidentMap" Height="449" Canvas.Left="28" Canvas.Top="99" Width="675" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name="boxAccidentID_showDS" Canvas.Left="107" TextWrapping="Wrap" Canvas.Top="72" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="BoxAccidentID_showDS_TextChanged"/>
+            <TextBox x:Name="boxAccidentID_showDS" Canvas.Left="106" TextWrapping="Wrap" Canvas.Top="72" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="BoxAccidentID_showDS_TextChanged"/>
             <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="68" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label x:Name="labelAccidentID_showDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="254" Canvas.Top="68" HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
+            <Label x:Name="labelAccidentID_showDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="480" Canvas.Top="68" HorizontalAlignment="Left" VerticalAlignment="Center" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
             <Label Content="Typ:" Canvas.Left="28" Canvas.Top="565" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Label Content="Schwere:" Canvas.Left="28" Canvas.Top="585" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60"/>
             <Label Content="Datum:" Canvas.Left="28" Canvas.Top="605" FontWeight="Bold" Width="60" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -47,43 +47,68 @@
             <Label x:Name="labelStreetType" Content="" Canvas.Left="107" Canvas.Top="625" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
 
+        <Canvas x:Name="canvasModifyData" Margin="264,0,0,0" Visibility="Visible">
+            <Label Content="Datensatz bearbeiten" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="19" VerticalAlignment="Top"/>
+            <TextBox x:Name="boxAccidentID_modifyDS" Canvas.Left="106" TextWrapping="Wrap" Canvas.Top="72" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="BoxAccidentID_modifyDS_TextChanged"/>
+            <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="68" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label x:Name="labelAccidentID_modifyDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="480" Canvas.Top="68" HorizontalAlignment="Left" VerticalAlignment="Center" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
+
+            <Label Content="GeoPoint:" Canvas.Left="28" Canvas.Top="119" FontWeight="Bold"/>
+            <TextBox x:Name="boxModify_mlat" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="123" Width="140" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Breitengrad" Canvas.Left="106" Canvas.Top="141" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="," Canvas.Left="246" Canvas.Top="119" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox x:Name="boxModify_mlon" Canvas.Left="264" TextWrapping="Wrap" Text="" Canvas.Top="123" Width="140" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Längengrad" Canvas.Left="264" Canvas.Top="141" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Typ:" Canvas.Left="28" Canvas.Top="168" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.651,-0.23"/>
+            <TextBox x:Name="boxModify_type" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="172" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Schwere:" Canvas.Left="28" Canvas.Top="198" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="boxModify_seriousness" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="202" Width="299" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Datum:" Canvas.Left="28" Canvas.Top="228" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <DatePicker x:Name="datePickerModify_date" Canvas.Left="106" Canvas.Top="230"/>
+            <Label Content="Stunde:" Canvas.Left="28" Canvas.Top="258" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="boxModify_hour" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="262" Width="299" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Strassenart:" Canvas.Left="28" Canvas.Top="288" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="boxModify_streetType" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="292" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Betroffene:" Canvas.Left="28" Canvas.Top="318" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox x:Name="checkModify_pedestrian" Content="Fussgänger" Canvas.Left="106" Canvas.Top="324"/>
+            <CheckBox x:Name="checkModify_bicycle" Content="Fahrrad" Canvas.Left="203" Canvas.Top="324" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <CheckBox x:Name="checkModify_motorcycle" Content="Motorrad" Canvas.Left="277" Canvas.Top="323" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="buttonCreateAndModifyEntry" Content="Eintrag der Datenbank aktualisieren" Canvas.Left="33" Canvas.Top="356" Height="22" Width="371" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White" Click="ButtonCreateAndModifyEntry_Click" BorderBrush="#FF5D44B7"/>
+        </Canvas>
+
+        <Canvas x:Name="canvasDeleteData" Margin="264,0,0,0" Visibility="Hidden">
+            <Label Content="Datensatz löschen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="19" VerticalAlignment="Top"/>
+            <TextBox x:Name="boxAccidentID_deleteDS" Canvas.Left="106" TextWrapping="Wrap" Canvas.Top="72" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="BoxAccidentID_deleteDS_TextChanged"/>
+            <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="68" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label x:Name="labelAccidentID_deleteDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="480" Canvas.Top="68" HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
+            <Button x:Name="buttonDeleteEntryCanvas" Content="Eintrag löschen" Canvas.Left="33" Canvas.Top="112" HorizontalAlignment="Left" VerticalAlignment="Center" Width="371" BorderBrush="#FFD03030" Click="ButtonDeleteEntryCanvas_Click" IsEnabled="False"/>
+        </Canvas>
+
         <Canvas x:Name="canvasAddData" Margin="264,0,0,0" Visibility="Hidden">
             <Label Content="Datensatz hinzufügen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="19" VerticalAlignment="Top"/>
-            <Label Content="GeoPoint:" Canvas.Left="28" Canvas.Top="89" FontWeight="Bold"/>
-            <TextBox x:Name="boxAdd_mlat" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="93" Width="140" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label Content="Breitengrad" Canvas.Left="106" Canvas.Top="111" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Label Content="," Canvas.Left="246" Canvas.Top="89" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="boxAdd_mlon" Canvas.Left="264" TextWrapping="Wrap" Text="" Canvas.Top="93" Width="140" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label Content="Längengrad" Canvas.Left="264" Canvas.Top="111" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label Content="Unfall ID:" Canvas.Left="28" Canvas.Top="138" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name="boxAdd_accidentID" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="142" Width="140" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="False"/>
+            <Label Content="GeoPoint:" Canvas.Left="28" Canvas.Top="119" FontWeight="Bold" RenderTransformOrigin="0.199,0.425" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="boxAdd_mlat" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="123" Width="140" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Breitengrad" Canvas.Left="106" Canvas.Top="141" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="," Canvas.Left="246" Canvas.Top="119" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="boxAdd_mlon" Canvas.Left="264" TextWrapping="Wrap" Text="" Canvas.Top="123" Width="140" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Längengrad" Canvas.Left="264" Canvas.Top="141" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="68" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="boxAdd_accidentID" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="72" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
             <Label Content="Typ:" Canvas.Left="28" Canvas.Top="168" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.651,-0.23"/>
-            <TextBox x:Name="boxAdd_type" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="172" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="boxAdd_type" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="172" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label Content="Schwere:" Canvas.Left="28" Canvas.Top="198" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="boxAdd_seriousness" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="202" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="boxAdd_seriousness" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="202" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label Content="Datum:" Canvas.Left="28" Canvas.Top="228" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <DatePicker x:Name="datePickerAdd_date" Canvas.Left="106" Canvas.Top="230"/>
             <Label Content="Stunde:" Canvas.Left="28" Canvas.Top="258" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="boxAdd_hour" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="262" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="boxAdd_hour" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="262" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label Content="Strassenart:" Canvas.Left="28" Canvas.Top="288" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="boxAdd_streetType" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="292" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="boxAdd_streetType" Canvas.Left="106" TextWrapping="Wrap" Text="" Canvas.Top="292" Width="298" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label Content="Betroffene:" Canvas.Left="28" Canvas.Top="318" FontWeight="Bold" RenderTransformOrigin="0.651,-0.23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <CheckBox x:Name="checkAdd_pedestrian" Content="Fussgänger" Canvas.Left="106" Canvas.Top="324"/>
             <CheckBox x:Name="checkAdd_bicycle" Content="Fahrrad" Canvas.Left="203" Canvas.Top="324" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <CheckBox x:Name="checkAdd_motorcycle" Content="Motorrad" Canvas.Left="277" Canvas.Top="323" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Button x:Name="buttonCreateAndAddEntry" Content="Eintrag zur Datenbank hinzufügen" Canvas.Left="33" Canvas.Top="356" Height="22" Width="371" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White" Click="ButtonCreateAndAddEntry_Click"/>
-        </Canvas>
-
-        <Canvas x:Name="canvasModifyData" Margin="264,0,0,0" Visibility="Hidden">
-            <Label Content="Datensatz bearbeiten" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="19" VerticalAlignment="Top"/>
-        </Canvas>
-
-        <Canvas x:Name="canvasDeleteData" Margin="264,0,0,0" Visibility="Visible">
-            <Label Content="Datensatz löschen" Foreground="#FF504E4E" FontSize="20" FontFamily="Arial Black" Background="{x:Null}" HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="19" VerticalAlignment="Top"/>
-            <TextBox x:Name="boxAccidentID_deleteDS" Canvas.Left="107" TextWrapping="Wrap" Canvas.Top="72" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="BoxAccidentID_deleteDS_TextChanged"/>
-            <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="68" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label x:Name="labelAccidentID_deleteDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="254" Canvas.Top="68" HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
-            <Button x:Name="buttonDeleteEntryCanvas" Content="Eintrag löschen" Canvas.Left="33" Canvas.Top="112" HorizontalAlignment="Left" VerticalAlignment="Center" Width="194" BorderBrush="#FFD03030" Click="ButtonDeleteEntryCanvas_Click" IsEnabled="False"/>
         </Canvas>
 
     </Grid>

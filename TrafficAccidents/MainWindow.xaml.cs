@@ -208,5 +208,57 @@ namespace TrafficAccidents
             delete.DeleteEntryById(cassandraDb.Session, Convert.ToInt32(boxAccidentID_deleteDS.Text));
             boxAccidentID_deleteDS.Clear();
         }
+
+        private void BoxAccidentID_modifyDS_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            labelAccidentID_modifyDS.Visibility = Visibility.Hidden;
+            buttonCreateAndModifyEntry.IsEnabled = true;
+            try
+            {
+                int id = Convert.ToInt32(boxAccidentID_modifyDS.Text);
+                read.GetEntryById(cassandraDb.Session, id);
+                DisplayEntryInModifyForm();
+                if (read.Accident == null) throw new Exception();
+            }
+            catch
+            {
+                labelAccidentID_modifyDS.Visibility = Visibility.Visible;
+                buttonCreateAndModifyEntry.IsEnabled = false;
+            }
+        }
+
+        private void DisplayEntryInModifyForm()
+        {
+            string[] coordinates = read.Accident.GeoPoint.Split(',');
+            boxModify_mlat.Text = coordinates[0].Trim();
+            boxModify_mlon.Text = coordinates[1].Trim();
+
+            boxModify_type.Text = read.Accident.Typ;
+            boxModify_seriousness.Text = read.Accident.Schwere;
+
+            string[] numberDayOfWeek = read.Accident.Wochentag.Split(' ');
+            int number = Convert.ToInt32(numberDayOfWeek[0].Trim());
+
+            DateTime entryDate = new DateTime(read.Accident.Jahr, read.Accident.Monat, number);
+            datePickerModify_date.SelectedDate = entryDate;
+
+            boxModify_hour.Text = read.Accident.Stunde.ToString();
+
+            boxModify_streetType.Text = read.Accident.Strasseart;
+
+            if (read.Accident.FussggBet == true) { checkModify_pedestrian.IsChecked = true; }
+            else checkModify_pedestrian.IsChecked = false;
+
+            if (read.Accident.FahrrdBet == true) { checkModify_bicycle.IsChecked = true; }
+            else checkModify_bicycle.IsChecked = false;
+
+            if (read.Accident.MotordBet == true) { checkModify_motorcycle.IsChecked = true; }
+            else checkModify_motorcycle.IsChecked = false;
+        }
+
+        private void ButtonCreateAndModifyEntry_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
