@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using Microsoft.Web.WebView2.Core;
-using Cassandra;
 using TrafficAccidents.Classes;
 using System;
 using System.Windows.Media;
@@ -18,6 +16,7 @@ namespace TrafficAccidents
         private Read read = new Read();
         private Add add = new Add();
         private Delete delete = new Delete();
+        private Modify modify = new Modify();
 
         public MainWindow()
         {
@@ -270,7 +269,41 @@ namespace TrafficAccidents
 
         private void ButtonCreateAndModifyEntry_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                DateTime selectedDate = datePickerModify_date.SelectedDate.Value;
 
+                int year = selectedDate.Year;
+                int month = selectedDate.Month;
+                string day = selectedDate.Day.ToString();
+                string dayOfWeek = selectedDate.ToString("dddd", new CultureInfo("de-DE"));
+                string weekday = $"{day} {dayOfWeek}";
+                int? hour = null;
+                if (boxModify_hour.Text != "") hour = Convert.ToInt32(boxModify_hour.Text);
+
+                Accident accident = new Accident
+                {
+                    GeoPoint = $"{boxModify_mlat.Text}, {boxModify_mlon.Text}",
+                    GeoShape = $"{{\"coordinates\": [{boxModify_mlon.Text}, {boxModify_mlat.Text}], \"type\": \"Point\"}}",
+                    IdUnfall = Convert.ToInt32(boxAccidentID_modifyDS.Text),
+                    Typ = boxModify_type.Text,
+                    Schwere = boxModify_seriousness.Text,
+                    Jahr = year,
+                    Monat = month,
+                    Wochentag = weekday,
+                    Stunde = hour,
+                    Strasseart = boxModify_streetType.Text,
+                    FussggBet = checkModify_pedestrian.IsChecked ?? false,
+                    FahrrdBet = checkModify_bicycle.IsChecked ?? false,
+                    MotordBet = checkModify_motorcycle.IsChecked ?? false
+                };
+
+                modify.UpdateEntry(cassandraDb.Session, accident);
+            }
+            catch
+            {
+                MessageBox.Show("Ungültige Eingaben erkannt.", "Fehler beim Hinzufügen");
+            }
         }
 
         private void BoxAdd_coordinates_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
