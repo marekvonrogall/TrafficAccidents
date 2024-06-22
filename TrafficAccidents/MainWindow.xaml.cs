@@ -189,18 +189,24 @@ namespace TrafficAccidents
         private void BoxAccidentID_deleteDS_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             labelAccidentID_deleteDS.Visibility = Visibility.Hidden;
+            buttonDeleteEntryCanvas.IsEnabled = true;
             try
             {
                 int id = Convert.ToInt32(boxAccidentID_deleteDS.Text);
                 read.GetEntryById(cassandraDb.Session, id);
                 if (read.Accident == null) throw new Exception();
             }
-            catch { labelAccidentID_deleteDS.Visibility = Visibility.Visible; }
+            catch
+            {
+                labelAccidentID_deleteDS.Visibility = Visibility.Visible;
+                buttonDeleteEntryCanvas.IsEnabled = false;
+            }
         }
 
-        private void buttonDeleteEntryCanvas_Click(object sender, RoutedEventArgs e)
+        private void ButtonDeleteEntryCanvas_Click(object sender, RoutedEventArgs e)
         {
-
+            delete.DeleteEntryById(cassandraDb.Session, Convert.ToInt32(boxAccidentID_deleteDS.Text));
+            boxAccidentID_deleteDS.Clear();
         }
     }
 }

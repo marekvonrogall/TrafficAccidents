@@ -1,6 +1,5 @@
 ﻿using Cassandra;
 using Cassandra.Mapping;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace TrafficAccidents.Classes

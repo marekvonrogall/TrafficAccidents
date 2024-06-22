@@ -83,7 +83,7 @@
             <TextBox x:Name="boxAccidentID_deleteDS" Canvas.Left="107" TextWrapping="Wrap" Canvas.Top="72" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="BoxAccidentID_deleteDS_TextChanged"/>
             <Label Content="Unfall-ID:" Canvas.Left="28" Canvas.Top="68" RenderTransformOrigin="0.058,0.329" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
             <Label x:Name="labelAccidentID_deleteDS" Content="Diese ID ist nicht im Datenset vorhanden!" Canvas.Left="254" Canvas.Top="68" HorizontalAlignment="Center" VerticalAlignment="Top" Width="302" Foreground="#FFD01E1E" Visibility="Hidden"/>
-            <Button x:Name="buttonDeleteEntryCanvas" Content="Eintrag löschen" Canvas.Left="33" Canvas.Top="112" HorizontalAlignment="Left" VerticalAlignment="Center" Width="194" BorderBrush="#FFD03030" Click="buttonDeleteEntryCanvas_Click"/>
+            <Button x:Name="buttonDeleteEntryCanvas" Content="Eintrag löschen" Canvas.Left="33" Canvas.Top="112" HorizontalAlignment="Left" VerticalAlignment="Center" Width="194" BorderBrush="#FFD03030" Click="ButtonDeleteEntryCanvas_Click" IsEnabled="False"/>
         </Canvas>
 
     </Grid>
